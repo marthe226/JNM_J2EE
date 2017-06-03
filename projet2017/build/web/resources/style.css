@@ -1,0 +1,280 @@
+table.listing {
+    font-family: Arial, Helvetica, sans-serif;
+    width:80%;
+    border-collapse:collapse;
+}
+
+
+.listing td, th {
+    font-size:1em;
+    border:1px solid #7CFC00;
+    padding:3px 7px 2px 7px;
+}
+
+.listing th {
+    font-size:1.1em;
+    text-align:left;
+    padding-top:5px;
+    padding-bottom:4px;
+    background-color:#7CFC00;
+    color:#ffffff;
+}
+
+.listing tr.alt td {
+    color:#000000;
+    background-color:#7CFC00;
+}
+
+
+/* unvisited link */
+a:link {
+    text-decoration:none;
+    color:#7CFC00; 
+}
+
+/* visited link */
+a:visited {
+    text-decoration:none; 
+    color: #7CFC00 ;
+}
+
+a:hover {text-decoration:underline;}   /* mouse over link */
+a:active {text-decoration:underline;}  /* selected link */
+
+/* The CSS for the form was taken from this project. 
+https://github.com/pmcelhaney/semantic-form.css/blob/master/index.html
+*/
+
+form.semantic {
+    width:70%;
+}
+
+form.semantic fieldset {
+    clear: both;
+    margin: 1em 0 0 0;
+    padding: 10px;
+    overflow: auto;
+    background-color: #7CFC00;
+    border: 1px solid #7CFC00;
+}
+
+form.semantic legend {
+    font-weight: bold;
+}
+
+form.semantic div {
+    clear: both;
+    margin: 0;
+    padding: 0.5em 0 0 0;
+    overflow: visible;
+}
+
+
+form.semantic label {
+    display: block;
+    float: left;
+    width: 120px;
+    text-align: right;
+    padding: 2px 1ex 6px 0;
+    vertical-align: baseline;
+}
+
+form.semantic label.after {
+    width: auto;
+    text-align: left; 
+    display: inline; 
+    float: none;
+}
+
+form.semantic label.long {
+    clear: both;
+    width: auto;
+    text-align: left;
+    float: none;
+}
+
+form.semantic input
+, form.semantic select
+, form.semantic textarea {
+    float: left;
+}
+
+form.semantic input.date {
+    width : 100px;
+}
+
+
+form.semantic input.money {
+    width : 100px;
+}
+
+form.semantic input[type=radio]
+, form.semantic input[type=checkbox] {
+    vertical-align: text-bottom;
+}
+
+form.semantic ul {
+    list-style-type: none; 
+    float: left;
+    padding: 0;
+    margin: 0;
+}
+
+form.semantic li {
+    clear: both;
+    padding: 0.2em 0;
+}
+
+form.semantic li label {
+    width: auto;
+    text-align: left;
+    padding: 0;
+}   
+
+form.semantic div.field-row  {
+    clear: none;
+    float: left;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+}
+
+form.semantic div.field-row * {
+    float: none;
+    display: inline;
+}
+
+form.semantic .button-row {
+    text-align: right;
+}
+
+form.semantic .button-row input {
+    float: none;
+}
+
+form.semantic div.long label  {
+    width: auto;
+    text-align: left;  
+    float: none;
+}
+
+form.semantic div.long textarea  {
+    width: 100%;
+}
+
+/* Errors -- for use with JQuery Validate, etc. */
+
+form.semantic input.error
+, form.semantic select.error
+, form.semantic textarea.error {
+    background-color: #77002a;
+    color: white;
+}                                                
+
+form.semantic label.error {
+    width: auto;
+    color: #77002a;
+    text-align: left;
+}       
+
+/* from caucho.com */
+#footer hr {
+    width: 100%;
+}
+#footer {
+    font-size: 80%;
+    text-align: right;
+}
+
+/* bottom nav */
+
+.bottom {
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-size : 90%;
+    color : #7CFC00;
+}
+
+ul.bottom {
+    list-style-type : none;
+    padding : 0em;
+    margin : 0;
+    margin-top : 3em;
+    text-align : center;
+}
+
+.bottom li {
+    display : inline;
+    margin : 0.1em 0.1em;
+    padding : 0.0em;
+}
+
+.bottom a {
+    color : #7CFC00;
+}
+
+.bottom a:hover {
+    color : #7CFC00;
+}
+
+/* bottom */
+
+.about {
+    color : #7CFC00;
+    font-family : Helvetica, Arial, sans-serif;
+    text-align : center;
+    font-size : 90%;
+}
+
+div.about {
+    margin-top : 1em;
+}
+
+input:invalid, textarea:invalid {
+    border: 1px solid red;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+ulien {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+lien {
+    float: left;
+}
+
+lien a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+lien a:hover {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
