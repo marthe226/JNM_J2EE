@@ -6,6 +6,11 @@
 package Utilisateurs.Modeles;
 
 import java.io.Serializable;
+import java.rmi.RemoteException;
+import javax.ejb.EJBMetaData;
+import javax.ejb.Handle;
+import javax.ejb.HomeHandle;
+import javax.ejb.RemoveException;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +21,7 @@ import javax.persistence.Id;
  * @author deptinfo
  */
 @Entity
-public class Etudiant implements Serializable {
+public class Etudiant implements Serializable, Utilisateur {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -126,6 +131,26 @@ public class Etudiant implements Serializable {
     @Override
     public String toString() {
         return "Utilisateurs.Modeles.Etudiant[ id=" + id + " ]";
+    }
+
+    @Override
+    public void remove(Handle handle) throws RemoteException, RemoveException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void remove(Object primaryKey) throws RemoteException, RemoveException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public EJBMetaData getEJBMetaData() throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public HomeHandle getHomeHandle() throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

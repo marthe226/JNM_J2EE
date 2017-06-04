@@ -8,6 +8,7 @@ package Utilisateurs.Servlets;
 import Utilisateurs.Gestionnaire.GestionnaireUtilisateurs;
 import Utilisateurs.Modeles.Enseignant;
 import Utilisateurs.Modeles.Etudiant;
+import Utilisateurs.Modeles.Utilisateur;
 import java.io.IOException;
 import java.util.Collection;
 import javax.ejb.EJB;
@@ -17,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -28,6 +30,7 @@ public class ServletUsers extends HttpServlet {
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
     // ici injection de code ! On n'initialise pas !  
+    
    
   
     /** 
@@ -41,6 +44,7 @@ public class ServletUsers extends HttpServlet {
             throws ServletException, IOException {  
         // Pratique pour décider de l'action à faire  
         String action = request.getParameter("action");  
+        HttpSession session = request.getSession(true);
         String forwardTo = "";  
         String message = "";  
   
@@ -67,8 +71,16 @@ public class ServletUsers extends HttpServlet {
                  gestionnaireUtilisateurs.creeEntreprise(request.getParameter("nom"), request.getParameter("prenom"), request.getParameter("pass"),request.getParameter("email"),request.getParameter("fct"), request.getParameter("entreprise"),request.getParameter("adr"),request.getParameter("elementSelecte"),request.getParameter("tel"));
                   forwardTo = "index.jsp?action=listerLesUtilisateurs";  
                   message = "Utilisateur crée !";
-            }
-            else {  
+            } else if (action.equals("connexion")) {    
+              Utilisateur utilisateur = gestionnaireUtilisateurs.isLoginValid(request.getParameter("email"), request.getParameter("password"));
+              if (utilisateur != null) {
+                            session.setAttribute("user", utilisateur);
+                            message = "vous êtes connecté" ;
+            } else {
+                            message = "login ou username erroné";
+            } 
+                forwardTo = "index.jsp?action=listerLesUtilisateurs";
+            }else {  
                 forwardTo = "index.jsp?action=todo";  
                 message = "La fonctionnalité pour le paramètre " + action + " est à implémenter !";  
             }  

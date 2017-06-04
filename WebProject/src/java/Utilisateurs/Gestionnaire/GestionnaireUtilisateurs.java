@@ -8,6 +8,7 @@ package Utilisateurs.Gestionnaire;
 import Utilisateurs.Modeles.Enseignant;
 import Utilisateurs.Modeles.Entreprise;
 import Utilisateurs.Modeles.Etudiant;
+import Utilisateurs.Modeles.Utilisateur;
 import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -32,9 +33,10 @@ public class GestionnaireUtilisateurs {
     }  
     
       public Enseignant creeEnseigant(String firstname, String lastname, String email, String password, String miage) { 
-        Enseignant enseigant = new Enseignant(firstname, lastname,email,password,miage)  ;
-        em.persist(enseigant);  
-        return enseigant;  
+        Enseignant enseignant = new Enseignant(firstname, lastname,email,password,miage)  ;
+        enseignant.setValidation("false");
+        em.persist(enseignant);  
+        return enseignant;  
         
     }  
       
@@ -44,7 +46,28 @@ public class GestionnaireUtilisateurs {
         return entreprise;  
     }  
    
-  
+    public Utilisateur isLoginValid(String email, String password) {
+     Query q1 = em.createQuery("select e from Etudiant e where e.email= :email and e.password= :password");
+     q1.setParameter("email", email);
+     q1.setParameter("password", password);
+     Query q2 = em.createQuery("select t from Enseignant t where t.email= :email and t.password= :password");
+     q2.setParameter("email", email);
+     q2.setParameter("password", password);
+     Query q3 = em.createQuery("select c from Entreprise c where c.email= :email and c.password= :password");
+     q3.setParameter("email", email);
+     q3.setParameter("password", password);       
+     if(!q1.getResultList().isEmpty()){
+         return (Utilisateur) q1.getResultList().get(0);
+     }
+     else if (!q2.getResultList().isEmpty()) {
+         return (Utilisateur) q2.getResultList().get(0);    
+     } else if (!q3.getResultList().isEmpty()) {
+          return (Utilisateur) q3.getResultList().get(0);    
+     } else {
+         return null; 
+     }
+   }
+      
    public Collection<Etudiant> getAllStudents() {  
         // Exécution d'une requête équivalente à un select *  
         Query q = em.createQuery("select e from Etudiant e");  
@@ -63,4 +86,6 @@ public class GestionnaireUtilisateurs {
         return q.getResultList();  
     }  
 
+        
+        
 }

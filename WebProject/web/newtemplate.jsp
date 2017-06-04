@@ -34,7 +34,7 @@ Released   : 20140309
 			<ul>
 				<li class="current_page_item"><a href="ServletUser?action=listerLesUtilisateurs" accesskey="1" title="">Homepage</a></li>
                                  <li><a href="Select_category.jsp">Inscription</a></li>                          
-                                 <li><a href="#">Connexion</a></li>
+                                 <li><a href="connect.jsp">Connexion</a></li>
                                  <li><a href="#">Deconnection</a>
 			</ul>
 		</div>
