@@ -13,8 +13,13 @@
 				<ul>
 					<li class="current_page_item"><a href="#" accesskey="1" title="">Acceuil</a></li>
 					<li><a href="#" accesskey="2" title="">Activitées</a></li>
+<<<<<<< HEAD
 					<li><a href="tableau.jsp" accesskey="3" title="">Connexion</a></li>
 					<li><a href="inscription1.jsp" accesskey="4" title="">Inscription</a></li>
+=======
+					<li><a href="#" accesskey="3" title="">Connexion</a></li>
+					<li><a href="choiprofil.jsp" accesskey="4" title="">Inscription</a></li>
+>>>>>>> 86e8ca7d1ca344511c8aefe782a078f879740730
 					
 				</ul>
 			</div>
