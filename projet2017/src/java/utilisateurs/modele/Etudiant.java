@@ -6,6 +6,7 @@
 package utilisateurs.modele;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,12 +17,68 @@ import javax.persistence.Id;
  * @author deptinfo
  */
 @Entity
-public class Etudiant extends Utilisateur implements Serializable {
+public class Etudiant implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(nullable = true)
+    private String nom,prenom,pass,email,datenaissance;
+
+    public Etudiant() {
+    }
+
+    public String getDatenaissance() {
+        return datenaissance;
+    }
+
+    public Etudiant(String nom, String prenom, String email, String pass,String datenaissance) {
+        this.datenaissance = datenaissance;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.pass = pass;
+        this.email = email;
+    }
+    
+
+    public void setDatenaissance(String datenaissance) {
+        this.datenaissance = datenaissance;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    
 
     public int getId() {
         return id;
@@ -45,10 +102,7 @@ public class Etudiant extends Utilisateur implements Serializable {
             return false;
         }
         Etudiant other = (Etudiant) object;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+        return this.id == other.id;
     }
 
     @Override

@@ -26,14 +26,10 @@ public class GestionnaireUtilisateurs {
     @PersistenceContext  
     private EntityManager em;
     
-      public void creerEtudiant(String nom,String prenom,String email,String pass){
-       Etudiant etu = new  Etudiant();
-       etu.setNom(nom);
-       etu.setPrenom(prenom);
-       etu.setEmail(email);
-       etu.setPass(pass);
+      public Etudiant creerEtudiant(String nom,String prenom,String email,String pass,String dates){
+       Etudiant etu = new  Etudiant(nom,prenom,email,pass,dates);
        em.persist(etu);
-      // return (Etudiant) etu;
+       return (Etudiant) etu;
    }
      
       public Collection<Etudiant> getAllStudent() {  
