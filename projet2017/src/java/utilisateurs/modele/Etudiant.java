@@ -22,7 +22,34 @@ public class Etudiant extends Utilisateur implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    private String naissance, miage ;
+    private boolean ancien ; 
 
+    public String getNaissance() {
+        return naissance;
+    }
+
+    public String getMiage() {
+        return miage;
+    }
+
+    public boolean isAncien() {
+        return ancien;
+    }
+
+    public void setNaissance(String naissance) {
+        this.naissance = naissance;
+    }
+
+    public void setMiage(String miage) {
+        this.miage = miage;
+    }
+
+    public void setAncien(boolean ancien) {
+        this.ancien = ancien;
+    }
+    
+    
     public int getId() {
         return id;
     }

@@ -70,11 +70,14 @@ public class ServletUser extends HttpServlet {
                  request.setAttribute("etudiant", request.getParameter("etudiant"));
                  forwardTo = "inscription2.jsp?action=choixprofil";
                  
-               
-                 
+       
+             }
+            else if (action.equals("creerUtilisateursDeTest")) {  
+                gestionnaireUtilisateurs.creerUtilisateursDeTest();  
+                forwardTo = "inscription2.jsp?action=choixprofil" ;  
+              
              }
 
-      
            System.out.println("Forward to "+forwardTo);
         RequestDispatcher dp = request.getRequestDispatcher(forwardTo + "&message=" + message);
         dp.forward(request, response);

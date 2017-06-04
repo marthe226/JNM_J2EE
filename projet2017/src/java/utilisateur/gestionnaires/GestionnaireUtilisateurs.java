@@ -41,5 +41,13 @@ public class GestionnaireUtilisateurs {
         Query q = em.createQuery("select e from Etudiant e");  
         return q.getResultList();  
     }  
- 
+
+       public void creerUtilisateursDeTest() {  
+         creerEtudiant("John", "Lennon", "jlennon","blabla");  
+         creerEtudiant("Paul", "Mac Cartney", "pmc","blabla");  
+         creerEtudiant("Ringo", "Starr", "rstarr","blabla");  
+         creerEtudiant("Georges", "Harisson", "georgesH","blabla");  
+    }  
+       
 }
+
