@@ -12,5 +12,14 @@ import javax.ejb.EJBHome;
  * @author deptinfo
  */
 public interface Utilisateur extends EJBHome  {
+ 
+    
+    public String getNom() ;
+
+    public String getPrenom() ;
+ 
+    public String getEmail() ;
+
+    public String getPassword() ;
     
 }

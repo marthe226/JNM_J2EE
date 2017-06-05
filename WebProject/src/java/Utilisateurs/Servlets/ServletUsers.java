@@ -75,12 +75,17 @@ public class ServletUsers extends HttpServlet {
               Utilisateur utilisateur = gestionnaireUtilisateurs.isLoginValid(request.getParameter("email"), request.getParameter("password"));
               if (utilisateur != null) {
                             session.setAttribute("user", utilisateur);
-                            message = "vous êtes connecté" ;
+                           
+                            message = "vous êtes connecté, bienvenue "  +utilisateur.getNom();
             } else {
                             message = "login ou username erroné";
             } 
                 forwardTo = "index.jsp?action=listerLesUtilisateurs";
-            }else {  
+            } else if (action.equals("deconnexion")) {    
+                   session.invalidate();
+                   message = "deconnecté";
+                   forwardTo = "index.jsp?action=listerLesUtilisateurs";
+            } else {  
                 forwardTo = "index.jsp?action=todo";  
                 message = "La fonctionnalité pour le paramètre " + action + " est à implémenter !";  
             }  
