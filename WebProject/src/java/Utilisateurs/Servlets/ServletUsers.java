@@ -47,48 +47,92 @@ public class ServletUsers extends HttpServlet {
         HttpSession session = request.getSession(true);
         String forwardTo = "";  
         String message = "";  
-  
-        if (action != null) {  
-            if (action.equals("listerLesUtilisateurs")) {  
-                Collection<Etudiant> liste = gestionnaireUtilisateurs.getAllStudents();  
-                request.setAttribute("listeDesUsers", liste);  
-                forwardTo = "index.jsp?action=listerLesUtilisateurs";  
-                message = "Liste des utilisateurs";  
-            } else if (action.equals("ListerProf")) {    
-                 Collection<Enseignant> liste = gestionnaireUtilisateurs.getAllTeachers();  
-                request.setAttribute("listeDesProfs", liste);  
-                forwardTo = "index.jsp?action=listerLesProfs";  
-                message = "Liste des utilisateurs";  
-            }else if (action.equals("creerEtudiant")) {    
-                 gestionnaireUtilisateurs.creeEtudiant(request.getParameter("nom"), request.getParameter("prenom"), request.getParameter("pass"),request.getParameter("email"), request.getParameter("naissance"),request.getParameter("elementSelecte"), request.getParameter("miage"));
-                  forwardTo = "index.jsp?action=listerLesUtilisateurs";  
-                  message = "Utilisateur crée !";
-            }else if (action.equals("creerEnseignant")) {    
-                 gestionnaireUtilisateurs.creeEnseigant(request.getParameter("nom"), request.getParameter("prenom"), request.getParameter("pass"),request.getParameter("email"),request.getParameter("elementSelecte"));
-                  forwardTo = "index.jsp?action=listerLesUtilisateurs";  
-                  message = "Utilisateur crée !";
-            } else if (action.equals("creerEntreprise")) {    
-                 gestionnaireUtilisateurs.creeEntreprise(request.getParameter("nom"), request.getParameter("prenom"), request.getParameter("pass"),request.getParameter("email"),request.getParameter("fct"), request.getParameter("entreprise"),request.getParameter("adr"),request.getParameter("elementSelecte"),request.getParameter("tel"));
-                  forwardTo = "index.jsp?action=listerLesUtilisateurs";  
-                  message = "Utilisateur crée !";
-            } else if (action.equals("connexion")) {    
-              Utilisateur utilisateur = gestionnaireUtilisateurs.isLoginValid(request.getParameter("email"), request.getParameter("password"));
-              if (utilisateur != null) {
-                            session.setAttribute("user", utilisateur);
-                           
-                            message = "vous êtes connecté, bienvenue "  +utilisateur.getNom();
-            } else {
-                            message = "login ou username erroné";
+  if (!action.equalsIgnoreCase("connexion") && !action.equalsIgnoreCase("creerEntreprise") && !action.equalsIgnoreCase("creerEnseignant") 
+          && !action.equalsIgnoreCase("creerEtudiant") && session.getAttribute("user") == null) 
+  {
+                forwardTo = "connect.jsp?action=connexion";
+                message = "veuillez vous connecter";
             } 
-                forwardTo = "index.jsp?action=listerLesUtilisateurs";
-            } else if (action.equals("deconnexion")) {    
-                   session.invalidate();
-                   message = "deconnecté";
-                   forwardTo = "index.jsp?action=listerLesUtilisateurs";
-            } else {  
-                forwardTo = "index.jsp?action=todo";  
-                message = "La fonctionnalité pour le paramètre " + action + " est à implémenter !";  
-            }  
+  else 
+  {  
+            switch (action) {
+                case "listerLesUtilisateurs":
+                    {
+                        Collection<Etudiant> liste = gestionnaireUtilisateurs.getAllStudents();
+                        request.setAttribute("listeDesUsers", liste);
+                        forwardTo = "index.jsp?action=listerLesUtilisateurs";
+                        message = "Liste des utilisateurs";
+                        break;
+                    }
+                case "ListerProf":
+                    {
+                        Collection<Enseignant> liste = gestionnaireUtilisateurs.getAllTeachers();
+                        request.setAttribute("listeDesProfs", liste);
+                        forwardTo = "index.jsp?action=listerLesProfs";
+                        message = "Liste des utilisateurs";
+                        break;
+                    }
+                case "creerEtudiant":
+                {
+                    gestionnaireUtilisateurs.creeEtudiant(request.getParameter("nom"), request.getParameter("prenom"), request.getParameter("pass"),request.getParameter("email"), request.getParameter("naissance"),request.getParameter("elementSelecte"), request.getParameter("miage"));
+                    forwardTo = "index.jsp?action=listerLesUtilisateurs";
+                    message = "Utilisateur crée !";
+                    break;
+                }
+                case "creerEnseignant":
+                {
+                    gestionnaireUtilisateurs.creeEnseigant(request.getParameter("nom"), request.getParameter("prenom"), request.getParameter("pass"),request.getParameter("email"),request.getParameter("elementSelecte"));
+                    forwardTo = "index.jsp?action=listerLesUtilisateurs";
+                    message = "Utilisateur crée !";
+                    break;
+                }
+                case "creerEntreprise":
+                {
+                    gestionnaireUtilisateurs.creeEntreprise(request.getParameter("nom"), request.getParameter("prenom"), request.getParameter("pass"),request.getParameter("email"),request.getParameter("fct"), request.getParameter("entreprise"),request.getParameter("adr"),request.getParameter("elementSelecte"),request.getParameter("tel"));
+                    forwardTo = "index.jsp?action=listerLesUtilisateurs";
+                    message = "Utilisateur crée !";
+                    break;
+                }
+                case "connexion":{
+                    Utilisateur utilisateur = gestionnaireUtilisateurs.isLoginValid(request.getParameter("email"), request.getParameter("password"));
+                    if (utilisateur != null) {
+                        session.setAttribute("user", utilisateur);
+                        message = "vous êtes connecté, bienvenue "  +utilisateur.getNom();
+                        forwardTo= "informations.jsp?action=packetu";
+                    } else {
+                        message = "login ou username erroné";  
+                    }       forwardTo = "connect.jsp?action=connexion";
+                    break;
+                }
+                case  "choixprofil":
+                {
+                    if("etudiant".equals(request.getParameter("profil"))){
+                        message= "vous êtes etudiant";
+                        forwardTo="inscription1.jsp?action=creerEtudiant";
+                    }
+                    break;
+                }
+                case "packetu":
+                {
+                     message= "bienvenue dans le pack etudiant";
+                     forwardTo= "packetudiant.jsp?action=payer";
+                   /* if(request.getParameter("packetu")!=null){
+                       
+                    }*/
+                    break;
+                }
+                case "deconnexion":
+                {
+                    session.invalidate();
+                    message = "deconnecté";
+                    forwardTo = "index.jsp?action=listerLesUtilisateurs";
+                    break;
+                }
+                default:
+                    forwardTo = "index.jsp?action=todo";
+                    message = "La fonctionnalité pour le paramètre " + action + " est à implémenter !";
+                    break;
+            }
         }  
   
         RequestDispatcher dp = request.getRequestDispatcher(forwardTo + "&message=" + message);  
